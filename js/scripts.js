@@ -1,19 +1,19 @@
-let pokemon1 = {
+let bulbasaur = {
   name: 'Bulbasaur',
   height: 0.7,  //note: height is in m(meters)
   types: ['grass', 'poison']
 };
 
-let pokemon2 = {
+let charizard = {
   name: 'Charizard',
   height: 1.7,
   types: ['fire', 'flying']
 };
 
-let pokemon3 = {
+let psyduck = {
   name: 'Psyduck',
   height: 0.8,
   types: ['water']
 }
 
-let pokemonList = [pokemon1, pokemon2, pokemon3];
+let pokemonList = [bulbasaur, charizard, psyduck];
