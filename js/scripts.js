@@ -16,7 +16,13 @@ let psyduck = {
   types: ['water']
 }
 
-let pokemonList = [bulbasaur, charizard, psyduck];
+let pidgeot = {
+  name: 'Pidgeot',
+  height: 1.5,
+  types: ['flying', 'normal']
+}
+
+let pokemonList = [bulbasaur, charizard, psyduck, pidgeot];
 let string1 = ' (height:'
 let string2 = ')'
 
