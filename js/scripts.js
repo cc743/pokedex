@@ -17,3 +17,10 @@ let psyduck = {
 }
 
 let pokemonList = [bulbasaur, charizard, psyduck];
+let string1 = ' (height:'
+let string2 = ')'
+
+for (let i = 0; i < pokemonList.length; i++){
+  document.write(pokemonList[i].name + string1 + pokemonList[i].height + string2);
+  document.write("<br />");
+}
