@@ -31,10 +31,19 @@ let pokemonList = [
 let string1 = ' (height:'
 let string2 = ')'
 
-for (let i = 0; i < pokemonList.length; i++){
-  document.write(pokemonList[i].name + string1 + pokemonList[i].height + string2);
-  if (pokemonList[i].height > 0.9)
-  document.write(" -- This pokemon is tall.")
+// for (let i = 0; i < pokemonList.length; i++){
+//   document.write(pokemonList[i].name + string1 + pokemonList[i].height + string2);
+//   if (pokemonList[i].height > 0.9)
+//   document.write(" -- This pokemon is tall.")
+//
+//   document.write("<br />");  //inclusion of a line break for the website
+// }
 
-  document.write("<br />");  //inclusion of a line break for the website
-}
+//repurposing original for() loop into forEach() loop
+pokemonList.forEach(function(pokemon) {
+  document.write(pokemon.name + string1 + pokemon.height + string2);
+  if (pokemon.height > 0.9)
+    document.write(" -- This pokemon is tall.");
+
+  document.write("<br />"); //inclusion of a line break for the website
+})
