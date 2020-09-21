@@ -44,11 +44,13 @@ let pokemonRepository = (function () {
     pokemonListItem.appendChild(button);
     pokemonListt.appendChild(pokemonListItem);
     //note: this code above was cut and paste from code we wrote in the forEach() loop down below
-    button.addEventListener("click", showDetails);  //see 3 lines below: 'showDetails' is the event handler function created herein used as the second parameter of 'addEventListener'
+    button.addEventListener("click", (e) => {   //what is the (e) and => for?
+      showDetails(pokemon);
+    })  //see 3 lines below: 'showDetails' is the event handler function created herein used as the second parameter of 'addEventListener'
   }
 
   function showDetails(pokemon){  //this right here is where I define the EVENT HANDLER FUNCTION 'showDetails'. It is used 3 lines above
-    console.log(pokemon);  //I am not sure what data is being logged here.  I am expecting the name/height/type of the pokemon to be logged.
+    console.log(pokemon);  //logs the pokemon object
   }
 
   //returning an object with the public functions *getAll* and *add* as the object keys. ADDENDUM: added *addListItem*.
