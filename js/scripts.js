@@ -43,7 +43,7 @@ let pokemonRepository = (function () {
     button.classList.add("button-class");  //button-class - this is named after the class created in the .css file (for styling the button)
     pokemonListItem.appendChild(button);
     pokemonListt.appendChild(pokemonListItem);
-    //note: this code was cut and paste from code we wrote in the forEach() loop down below
+    //note: this code above was cut and paste from code we wrote in the forEach() loop down below
     button.addEventListener("click", showDetails);  //see 3 lines below: 'showDetails' is the event handler function created herein used as the second parameter of 'addEventListener'
   }
 
