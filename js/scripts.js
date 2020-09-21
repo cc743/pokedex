@@ -34,14 +34,26 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
+  function addListItem(pokemon){
+    //note: for now, named pokemonListt (2 t's) in order to avoid confusion with variable pokemonList up in pokemonRepository
+    let pokemonListt = document.querySelector(".pokemon-list"); //note: there is a dot in front of "pokemon-list" because we are referring to a class in the HTML file.  I think a class is a reference to an element in the HTML file: in our case, an unordered list
+    let pokemonListItem = document.createElement("li");
+    let button = document.createElement("button");
+    button.innerText = pokemon.name;
+    button.classList.add("button-class");  //button-class - this is named after the class created in the .css file (for styling the button)
+    pokemonListItem.appendChild(button);
+    pokemonListt.appendChild(pokemonListItem);
+  }
+
   //returning an object with the public functions *getAll* and *add* as the object keys
   return {
     add: add,
-    getAll: getAll
+    getAll: getAll,
+    addListItem: addListItem
   };
 })();
 
-console.log(pokemonRepository.getAll());  //check it in console
+//console.log(pokemonRepository.getAll());  //check it in console
 
 //defining strings for use in for loop
 let string1 = ' (height:';
@@ -51,18 +63,14 @@ let pokRepoVar = pokemonRepository.getAll();  //this variable is the list of Pok
 
 //repurposing original for() loop into forEach() loop
 pokRepoVar.forEach(function(pokemon) {
-  document.write(pokemon.name + string1 + pokemon.height + string2);
-  if (pokemon.height > 0.9)
-    document.write(" -- This pokemon is tall.");
+  // //note: for now, named pokemonListt (2 t's) in order to avoid confusion with variable pokemonList up in pokemonRepository
+  // let pokemonListt = document.querySelector(".pokemon-list"); //note: there is a dot in front of "pokemon-list" because we are referring to a class in the HTML file.  I think a class is a reference to an element in the HTML file: in our case, an unordered list
+  // let pokemonListItem = document.createElement("li");
+  // let button = document.createElement("button");
+  // button.innerText = pokemon.name;
+  // button.classList.add("button-class");  //button-class - this is named after the class created in the .css file (for styling the button)
+  // pokemonListItem.appendChild(button);
+  // pokemonListt.appendChild(pokemonListItem);
+  pokemonRepository.addListItem(pokemon);
 
-  document.write("<br />"); //inclusion of a line break for the website
 })
-
-//old code - will remove in next task
-// for (let i = 0; i < pokemonList.length; i++){
-//   document.write(pokemonList[i].name + string1 + pokemonList[i].height + string2);
-//   if (pokemonList[i].height > 0.9)
-//   document.write(" -- This pokemon is tall.")
-//
-//   document.write("<br />");  //inclusion of a line break for the website
-// }
