@@ -1,30 +1,7 @@
 //modified pokemonList to be an array with  objects created inside said array
 let pokemonRepository = (function () {
-  let pokemonList = [
-    {
-      name: 'Bulbasaur',
-      height: 0.7,  //note: height is in m(meters)
-      types: ['grass', 'poison']
-    },
-
-    {
-      name: 'Charizard',
-      height: 1.7,
-      types: ['fire', 'flying']
-    },
-
-    {
-      name: 'Psyduck',
-      height: 0.8,
-      types: ['water']
-    },
-
-    {
-      name: 'Pidgeot',
-      height: 1.5,
-      types: ['flying', 'normal']
-    }
-  ]
+  let pokemonList = [];  //empty array
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';  //the URL of the Pokemon API
 
   function add(pokemon) {
     pokemonList.push(pokemon);
@@ -44,30 +21,68 @@ let pokemonRepository = (function () {
     pokemonListItem.appendChild(button);
     pokemonListt.appendChild(pokemonListItem);
     //note: this code above was cut and paste from code we wrote in the forEach() loop down below
-    button.addEventListener("click", (e) => {   //what is the (e) and => for?
+    button.addEventListener("click", (e) => {   //this concept is called a callback function
       showDetails(pokemon);
     })  //see 3 lines below: 'showDetails' is the event handler function created herein used as the second parameter of 'addEventListener'
   }
 
-  function showDetails(pokemon){  //this right here is where I define the EVENT HANDLER FUNCTION 'showDetails'. It is used 3 lines above
-    console.log(pokemon);  //logs the pokemon object
+  //this right here is where I define the EVENT HANDLER FUNCTION 'showDetails'. It is used 3 lines above
+  function showDetails(pokemon){
+    loadDetails(pokemon).then(function (){  // you can use existing showDetails() function to execute loadDetails().
+      console.log(pokemon);  //logs the pokemon object
+    });
   }
 
-  //returning an object with the public functions *getAll* and *add* as the object keys. ADDENDUM: added *addListItem*.
+  function loadList(){  //loadList function
+    return fetch(apiUrl).then(function (response){
+      return response.json();
+    }).then(function (json){
+      json.results.forEach(function (item){
+        let pokemon = {
+          name: item.name,
+          detailsUrl: item.url
+        };
+        add(pokemon);
+      });
+    }).catch (function (e){
+      console.error(e);
+    })
+  }
+
+  function loadDetails(item) {  //loadDetails function
+    let url = item.detailsUrl;
+    return fetch(url).then(function (response){
+      return response.json();
+    }).then(function (details){
+      //Now we add the details to the item
+      item.imageUrl = details.sprites.front_default;
+      item.height = details.height;
+      item.types = details.types;
+    }).catch(function (e){
+      console.error(e);
+    });
+  }
+
+  //returning an object with the public functions *getAll* and *add* as the object keys. ADDENDUM: added *addListItem*. ADDENDUM: added *loadList* and *loadDetails*
   return {
     add: add,
     getAll: getAll,
+    loadList: loadList,
+    loadDetails: loadDetails,
     addListItem: addListItem
   };
 })();
 
-//defining strings for use in for loop
-let string1 = ' (height:';
-let string2 = ')';
+pokemonRepository.loadList().then(function(){
+  //Now the data is loaded! (comment from Lesson 1.7)
+  pokemonRepository.getAll().forEach(function(pokemon){
+    pokemonRepository.addListItem(pokemon);
+  });
+});
 
-let pokRepoVar = pokemonRepository.getAll();  //this variable is the list of Pokemon, for easier readability in the next line of code
+//let pokRepoVar = pokemonRepository.getAll();  //this variable is the list of Pokemon, for easier readability in the next line of code
 
 //repurposing original for() loop into forEach() loop
-pokRepoVar.forEach(function(pokemon) {
-  pokemonRepository.addListItem(pokemon);
-})
+// pokRepoVar.forEach(function(pokemon){
+//   pokemonRepository.addListItem(pokemon);
+// })
