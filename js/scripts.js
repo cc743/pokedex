@@ -1,5 +1,8 @@
 //modified pokemonList to be an array with  objects created inside said array
 let pokemonRepository = (function () {  //start of an IIFE (immediately invoked function expression)
+
+  let modalContainer = document.querySelector('#modal-container');  //selects the div with the id "modal-container" from index.html
+
   let pokemonList = [];  //empty array
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';  //the URL of the Pokemon API
 
@@ -27,10 +30,47 @@ let pokemonRepository = (function () {  //start of an IIFE (immediately invoked 
 
   //this right here is where I define the EVENT HANDLER FUNCTION 'showDetails'. It is used 3 lines above
   function showDetails(pokemon){
-    loadDetails(pokemon).then(function (){  // you can use existing showDetails() function to execute loadDetails().
-      console.log(pokemon);  //logs the pokemon object intp console
+    loadDetails(pokemon).then(function (){
+      //console.log(pokemon);  //logs the pokemon object into console
+      let modal = document.createElement('div');
+      modal.classList.add('modal');
+
+      let closeButtonElement = document.createElement('button');
+      closeButtonElement.classList.add('modal-close');
+      closeButtonElement.innerText = 'X';
+      closeButtonElement.addEventListener('click', hideModal);
+
+      let titleElement = document.createElement('h1');
+      titleElement.innerText = pokemon.name;
+
+      let contentElement = document.createElement('p');
+      contentElement.innerText = 'height: ' + pokemon.height;
+
+      modal.appendChild(closeButtonElement);
+      modal.appendChild(titleElement);
+      modal.appendChild(contentElement);
+      modalContainer.appendChild(modal);  //this is ultimately the link between "modalContainer" and "modal"
+
+      modalContainer.classList.add('is-visible');
     });
   }
+
+  function hideModal() {
+    modalContainer.classList.remove('is-visible');
+  }
+
+  window.addEventListener('keydown', (e)=>{
+    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')){
+      hideModal();
+    }
+  });
+
+  modalContainer.addEventListener('click', (e)=>{
+    let target = e.target;
+    if (target === modalContainer){
+      hideModal();
+    }
+  })
 
   function loadList(){  //loadList function
     return fetch(apiUrl).then(function (response){  //fetches data from apiUrl (defined above)...
