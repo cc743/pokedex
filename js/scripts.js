@@ -20,7 +20,7 @@ let pokemonRepository = (function () {  //start of an IIFE (immediately invoked 
     button.classList.add("button-class");  //"button-class" - refers class created in the .css file (for styling the button)
     pokemonListItem.appendChild(button);  //appends the completed button (including the pokemon's name) to the list item
     pokemonListt.appendChild(pokemonListItem);  //appends the list item to the unordered list
-    button.addEventListener("click", (e) => {   //this concept is called a callback function
+    button.addEventListener("click", (e) => {   //this concept is called a callback function. (e) is a shorthand reference for event
       showDetails(pokemon);
     })  //see 3 lines below: 'showDetails' is the event handler function created herein used as the second parameter of 'addEventListener'
   }
