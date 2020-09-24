@@ -2,6 +2,7 @@
 let pokemonRepository = (function () {  //start of an IIFE (immediately invoked function expression)
 
   let modalContainer = document.querySelector('#modal-container');  //selects the div with the id "modal-container" from index.html
+  let imageContainer = document.querySelector('#image-container');
 
   let pokemonList = [];  //empty array
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';  //the URL of the Pokemon API
@@ -31,6 +32,7 @@ let pokemonRepository = (function () {  //start of an IIFE (immediately invoked 
   //this right here is where I define the EVENT HANDLER FUNCTION 'showDetails'. It is used 3 lines above
   function showDetails(pokemon){
     loadDetails(pokemon).then(function (){
+      modalContainer.innerHTML = '';
       //console.log(pokemon);  //logs the pokemon object into console
       let modal = document.createElement('div');
       modal.classList.add('modal');
@@ -46,9 +48,13 @@ let pokemonRepository = (function () {  //start of an IIFE (immediately invoked 
       let contentElement = document.createElement('p');
       contentElement.innerText = 'height: ' + pokemon.height;
 
+      let imageElement = document.createElement('img');
+      imageElement.src = pokemon.imageUrl;
+
       modal.appendChild(closeButtonElement);
       modal.appendChild(titleElement);
       modal.appendChild(contentElement);
+      modal.appendChild(imageElement);
       modalContainer.appendChild(modal);  //this is ultimately the link between "modalContainer" and "modal"
 
       modalContainer.classList.add('is-visible');
