@@ -17,14 +17,21 @@ let pokemonRepository = (function () {  //start of an IIFE (immediately invoked 
 
   function addListItem(pokemon){
     //note: for now, first variable is named pokemonListt (2 t's) in order to avoid confusion with variable pokemonList up above in pokemonRepository
-    let pokemonListt = document.querySelector(".pokemon-list"); //selecting the "pokemon-list" unordered list - see index.html
-    let pokemonListItem = document.createElement("li"); //create list item (see above)
-    let button = document.createElement("button");  //create button
-    button.innerText = pokemon.name;  //the name is taken from the pokemon parameter
-    button.classList.add("button-class");  //"button-class" - refers class created in the .css file (for styling the button)
-    pokemonListItem.appendChild(button);  //appends the completed button (including the pokemon's name) to the list item
-    pokemonListt.appendChild(pokemonListItem);  //appends the list item to the unordered list
-    button.addEventListener("click", (e) => {   //this concept is called a callback function. (e) is a shorthand reference for event
+    let pokemonListt = $(".pokemon-list"); //selecting the "pokemon-list" unordered list via jQuery means;
+    // let pokemonListItem = document.createElement("li"); //create list item (see above)
+    let pokemonListItem = $("<li></li>");
+    // let button = document.createElement("button");  //create button
+    let button = $("<button>"+pokemon.name+"</button>");
+    // button.innerText = pokemon.name;  //the name is taken from the pokemon parameter
+    // button.classList.add("button-class");  //"button-class" - refers class created in the .css file (for styling the button)
+    // pokemonListItem.appendChild(button);  //appends the completed button (including the pokemon's name) to the list item
+    button.addClass("btn-primary");
+    button.attr("data-toggle", "modal");  //this works with Bootstrap to open the modal when pokemon name is clicked
+
+    pokemonListItem.append(button);
+    pokemonListt.append(pokemonListItem);
+    // pokemonListt.appendChild(pokemonListItem);  //appends the list item to the unordered list
+    button.on("click", (e) => {   //this concept is called a callback function. (e) is a shorthand reference for event
       showDetails(pokemon);
     })  //see 3 lines below: 'showDetails' is the event handler function created herein used as the second parameter of 'addEventListener'
   }
