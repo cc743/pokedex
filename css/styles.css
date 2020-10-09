@@ -1,4 +1,4 @@
-html,
+/* html,
 body {
   font-family: Arial, sans-serif;
 }
@@ -12,22 +12,22 @@ body {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
+  margin: 4px 2px; */
   /* -webkit-transition-duration: 0.4s; */
-  transition-duration: 0.4s;
+  /* transition-duration: 0.4s;
   cursor: pointer;
   background-color: white;
   color: black;
   border: 2px solid #4caf50;
-}
+} */
 
-#pokelist li {
+/* #pokelist li {
   list-style-type: none;
-}
+} */
 
 /* start of CSS for the modals*/
 
-#modal-container {
+/* #modal-container {
   position: fixed;
   padding: 20px;
   box-sizing: border-box;
@@ -35,20 +35,20 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5); */
 
   /* to show it above other content */
-  z-index: 999;
+  /* z-index: 999; */
 
   /* to allow scrolling if the screen is not high enough*/
-  overflow: auto;
+  /* overflow: auto; */
 
   /* this is used to center the modal */
-  display: grid;
+  /* display: grid;
   text-align: center;
-}
+} */
 
-.modal {
+/* .modal {
   margin: auto;
   display: inline-block;
   box-sizing: border-box;
@@ -78,8 +78,72 @@ body {
 
  #modal-container{
   display: none;
+} */
+
+/* #modal-container.is-visible{
+  display: block;
+} */
+
+body {
+background-color: #E0E1E1;
 }
 
-#modal-container.is-visible{
-  display: block; /*CSS for modal container - add your own desired CSS styles here*/
+#pokedex-title {
+  margin-left: 45px;
+  color: #28536B;
+  font-size: 100px;
+}
+.pokemon-list {
+  font-size: 22px;
+  font-weight: bold;
+  list-style-type: none;
+  margin-top: 60px;
+}
+
+.btn-primary {
+  color: #E0FADB;
+  background-color: #28536B;
+  border-radius: 20px;
+  border-right: 1px solid rgba(0, 0, 0, .5);
+  border-bottom: 1px solid rgba(0, 0, 0, .5);
+  border-top: none;
+  border-left: none;
+  margin-bottom: 3px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.btn-primary:hover {
+  transition: 300ms;
+  transform: translatex(10px);
+  color: #28536B;
+  background-color: #E0FADB;
+  border-radius: 20px;
+  border: none;
+  border-right: none;
+  border-bottom: none;
+  border-top: 1px solid rgba(0, 0, 0, .2);
+  border-left: 1px solid rgba(0, 0, 0, .2);
+}
+
+.modal-header {
+  background-color: #E0E1E1;
+}
+
+h1 {
+  font-size: 50px;
+  color: #28536B;
+}
+
+.modal-body {
+  background-color: #E0E1E1;
+  font-size: 30px;
+  color: #28536B;
+}
+
+.modal-backdrop {
+  width: 100%;
+  height: 100%;
 }

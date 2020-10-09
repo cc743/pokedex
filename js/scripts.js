@@ -1,9 +1,6 @@
 //modified pokemonList to be an array with  objects created inside said array
 let pokemonRepository = (function () {  //start of an IIFE (immediately invoked function expression)
 
-  let modalContainer = document.querySelector('#modal-container');  //selects the div with the id "modal-container" from index.html
-  let imageContainer = document.querySelector('#image-container');
-
   let pokemonList = [];  //empty array
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';  //the URL of the Pokemon API
 
@@ -18,19 +15,15 @@ let pokemonRepository = (function () {  //start of an IIFE (immediately invoked 
   function addListItem(pokemon){
     //note: for now, first variable is named pokemonListt (2 t's) in order to avoid confusion with variable pokemonList up above in pokemonRepository
     let pokemonListt = $(".pokemon-list"); //selecting the "pokemon-list" unordered list via jQuery means;
-    // let pokemonListItem = document.createElement("li"); //create list item (see above)
     let pokemonListItem = $("<li></li>");
-    // let button = document.createElement("button");  //create button
     let button = $("<button>"+pokemon.name+"</button>");
-    // button.innerText = pokemon.name;  //the name is taken from the pokemon parameter
-    // button.classList.add("button-class");  //"button-class" - refers class created in the .css file (for styling the button)
-    // pokemonListItem.appendChild(button);  //appends the completed button (including the pokemon's name) to the list item
     button.addClass("btn-primary");
     button.attr("data-toggle", "modal");  //this works with Bootstrap to open the modal when pokemon name is clicked
-
+    button.attr("data-target", "#pokemonModal");
     pokemonListItem.append(button);
     pokemonListt.append(pokemonListItem);
-    // pokemonListt.appendChild(pokemonListItem);  //appends the list item to the unordered list
+
+    //this listens for the user to click on a pokemon button on the site, then runs the showDetails() function
     button.on("click", (e) => {   //this concept is called a callback function. (e) is a shorthand reference for event
       showDetails(pokemon);
     })  //see 3 lines below: 'showDetails' is the event handler function created herein used as the second parameter of 'addEventListener'
@@ -39,51 +32,9 @@ let pokemonRepository = (function () {  //start of an IIFE (immediately invoked 
   //this right here is where I define the EVENT HANDLER FUNCTION 'showDetails'. It is used 3 lines above
   function showDetails(pokemon){
     loadDetails(pokemon).then(function (){
-      modalContainer.innerHTML = '';
-      //console.log(pokemon);  //logs the pokemon object into console
-      let modal = document.createElement('div');
-      modal.classList.add('modal');
-
-      let closeButtonElement = document.createElement('button');
-      closeButtonElement.classList.add('modal-close');
-      closeButtonElement.innerText = 'X';
-      closeButtonElement.addEventListener('click', hideModal);
-
-      let titleElement = document.createElement('h1');
-      titleElement.innerText = pokemon.name;
-
-      let contentElement = document.createElement('p');
-      contentElement.innerText = 'height: ' + pokemon.height;
-
-      let imageElement = document.createElement('img');
-      imageElement.src = pokemon.imageUrl;
-
-      modal.appendChild(closeButtonElement);
-      modal.appendChild(titleElement);
-      modal.appendChild(contentElement);
-      modal.appendChild(imageElement);
-      modalContainer.appendChild(modal);  //this is ultimately the link between "modalContainer" and "modal"
-
-      modalContainer.classList.add('is-visible');
+      showModal(pokemon); //another function is called to run the modal in the browser
     });
   }
-
-  function hideModal() {
-    modalContainer.classList.remove('is-visible');
-  }
-
-  window.addEventListener('keydown', (e)=>{
-    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')){
-      hideModal();
-    }
-  });
-
-  modalContainer.addEventListener('click', (e)=>{
-    let target = e.target;
-    if (target === modalContainer){
-      hideModal();
-    }
-  })
 
   function loadList(){  //loadList function
     return fetch(apiUrl).then(function (response){  //fetches data from apiUrl (defined above)...
@@ -119,9 +70,10 @@ let pokemonRepository = (function () {  //start of an IIFE (immediately invoked 
   return {
     add: add,
     getAll: getAll,
+    showModal: showModal,
     loadList: loadList,
     loadDetails: loadDetails,
-    addListItem: addListItem
+    addListItem: addListItem,
   };
 })();  //note the end of this function })() -- this indicates an IIFE
 
@@ -130,3 +82,24 @@ pokemonRepository.loadList().then(function(){  //from the IIFE(pokemonRepository
     pokemonRepository.addListItem(pokemon);
   });
 });
+//////////////////////////////////////////////////////////////////////
+//showModal() function defined here...thanks to hoisting and scoping//
+function showModal(pokemon) {
+  let modalBody = $(".modal-body");
+  let modalTitle = $(".modal-title");
+
+  modalTitle.empty();
+  modalBody.empty();
+
+  let nameElement = $("<h1>"+pokemon.name+"</h1>");
+
+  let heightElement = $("<p>"+"Height: "+pokemon.height+"</p>");
+
+  let imageElement = $("<img class='modal-img' style='width:50%'>");
+  imageElement.attr("src", pokemon.imageUrl);
+
+  //appends the children to their parent containers
+  modalTitle.append(nameElement);
+  modalBody.append(heightElement);
+  modalBody.append(imageElement);
+}
