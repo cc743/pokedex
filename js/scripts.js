@@ -32,7 +32,7 @@ let pokemonRepository = (function () {  //start of an IIFE (immediately invoked 
   //this right here is where I define the EVENT HANDLER FUNCTION 'showDetails'. It is used 3 lines above
   function showDetails(pokemon){
     loadDetails(pokemon).then(function (){
-      showModal(pokemon); //another function is called to run the modal in the browser
+      showModal(pokemon); //another function is called to run the modal in the browser, inspired by recent student submission (Trevor A.) and the lesson's video on Bootstrap modals
     });
   }
 
