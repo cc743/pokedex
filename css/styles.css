@@ -1,13 +1,11 @@
-
 body {
-background-color: #E0E1E1;
+  background-color: #b3b4b4;
 }
 
-#pokedex-title {
-  margin-left: 45px;
-  color: #28536B;
-  font-size: 100px;
+.navbar {
+  background-color: #ffffff;
 }
+
 .pokemon-list {
   font-size: 22px;
   font-weight: bold;
@@ -16,46 +14,46 @@ background-color: #E0E1E1;
 }
 
 .btn-primary {
-  color: #E0FADB;
-  background-color: #28536B;
-  border-radius: 20px;
-  border-right: 1px solid rgba(0, 0, 0, .5);
-  border-bottom: 1px solid rgba(0, 0, 0, .5);
+  color: #ffffff;
+  background-color: #28536b;
+  border-radius: 10px;
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
   border-top: none;
   border-left: none;
   margin-bottom: 3px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .btn-primary:hover {
   transition: 300ms;
   transform: translatex(10px);
-  color: #28536B;
-  background-color: #E0FADB;
-  border-radius: 20px;
+  color: #28536b;
+  background-color: #cfcffc;
+  border-radius: 10px;
   border: none;
   border-right: none;
   border-bottom: none;
-  border-top: 1px solid rgba(0, 0, 0, .2);
-  border-left: 1px solid rgba(0, 0, 0, .2);
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .modal-header {
-  background-color: #E0E1E1;
+  background-color: #ffffff;
 }
 
 h1 {
-  font-size: 50px;
-  color: #28536B;
+  font-size: 40px;
+  color: #28536b;
 }
 
 .modal-body {
-  background-color: #E0E1E1;
-  font-size: 30px;
-  color: #28536B;
+  background-color: #b3b4b4;
+  font-size: 25px;
+  color: #28536b;
 }
 
 .modal-backdrop {
