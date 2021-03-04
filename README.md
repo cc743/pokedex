@@ -1,6 +1,8 @@
 # Pokedex
 
-Small web application with HTML, CSS, and JavaScript that loads data from an external Pokemon-based API and enables the viewing of details for each individual Pokemon
+Small web application with HTML, CSS, and JavaScript that loads data from an external Pokemon-based API and enables the viewing of details for each individual Pokemon.
+
+![Pokedex](/pics/Snip8_pokedex.PNG) 
 
 Pokemon API used for this project: https://pokeapi.co/ 
 
